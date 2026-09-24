@@ -115,6 +115,18 @@
   .wa{background:#0E1B2E;color:#fff}
   .wa:hover{background:#16294A}
 
+  .perks{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px}
+  .perks div{background:#fff;padding:18px 14px;text-align:center}
+  .perks svg{width:30px;height:30px;color:var(--navy-2);margin-bottom:8px}
+  .perks b{display:block;font-family:"Archivo",sans-serif;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+  .perks span{font-size:.85rem;color:var(--grey);line-height:1.4;display:block}
+  .promise{margin-top:14px;background:var(--navy-1);color:#EAF1F8;padding:22px 24px;display:grid;grid-template-columns:1fr auto;gap:14px 24px;align-items:center;position:relative;overflow:hidden}
+  .promise::after{content:"";position:absolute;right:190px;top:-20%;bottom:-20%;width:4px;background:var(--cyan);transform:skewX(-19deg);opacity:.8}
+  .promise p{margin:0;color:#B9C8DA;font-size:.95rem}
+  .promise h3{margin:0 0 4px;font-size:1.05rem;color:#fff}
+  .promise .big{font-family:"Archivo",sans-serif;font-weight:800;font-style:italic;font-size:1.5rem;line-height:1.05;letter-spacing:-.03em;color:#fff;text-align:right;position:relative;z-index:1}
+  .promise .big em{color:var(--cyan)}
+  @media (max-width:560px){.perks{grid-template-columns:1fr 1fr}.promise{grid-template-columns:1fr}.promise .big{text-align:left}.promise::after{display:none}}
   footer{background:#060B13;color:#6B7C90;font-size:.83rem;padding:30px 0}
   .foot-in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap;align-items:center}
   footer img{height:16px;opacity:.55;display:block}
@@ -421,6 +433,17 @@
 
   <p class="note">Free and no obligation. Final premiums are subject to each insurer's underwriting and terms.</p>
 </form>
+
+<div class="perks">
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-2.8.8-2.8 2s1.1 1.7 2.8 2 2.8.8 2.8 2-1.1 2-2.8 2c-1.4 0-2.5-.5-3-1.5M12 6.5v11"/></svg><b>Lowest price</b><span>We send you the cheapest quote we find</span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><b>All insurers</b><span>Compared side by side, so you don't have to</span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13v-1a8 8 0 0116 0v1"/><rect x="3" y="13" width="4" height="6" rx="1"/><rect x="17" y="13" width="4" height="6" rx="1"/><path d="M19 19c0 1.5-2 2-5 2"/></svg><b>Real people</b><span>A human on WhatsApp, open 24 hours</span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8h6M9 12h6M9 16h3"/><path d="M14.5 17l1.5 1.5 3-3"/></svg><b>Fast &amp; free</b><span>Two minutes to fill, no obligation</span></div>
+</div>
+<div class="promise">
+  <div><h3>Renewing, switching or just bought?</h3><p>Same cover, compared across insurers — you only pay less.</p></div>
+  <div class="big">Same cover.<br><em>Better price.</em></div>
+</div>
 </main>
 
 <footer>
@@ -435,6 +458,7 @@
   var SB = 'https://oevcvroujfdmnprdssax.supabase.co';
   var KEY = 'sb_publishable_qDM7XPqBJn263X9uj4r-RA_HTnxfIE7';
   var WA = '6588080515';
+  var CORE_MAKES = ['Audi','BMW','BYD','Honda','Hyundai','Kia','Lexus','Mazda','Mercedes-Benz','MINI','Mitsubishi','Nissan','Peugeot','Porsche','Skoda','Subaru','Suzuki','Tesla','Toyota','Volkswagen','Volvo'];
   var BIKE_MAKES = ['Aprilia','Benelli','BMW','CFMoto','Ducati','Harley-Davidson','Honda','Husqvarna','Indian','Kawasaki','KTM','Kymco','Moto Guzzi','MV Agusta','Piaggio','Royal Enfield','Suzuki','SYM','Triumph','Vespa','Yamaha','Zontes'];
 
   var f = document.getElementById('f');
@@ -453,8 +477,8 @@
     if(type === 'bike'){ var o={}; BIKE_MAKES.forEach(function(m){o[m]=[];}); cat[k]=o; return Promise.resolve(o); }
     return fetch(SB+'/rest/v1/rpc/sv_catalog', {method:'POST', headers:{apikey:KEY, Authorization:'Bearer '+KEY, 'Content-Type':'application/json'}, body: JSON.stringify({p_type:type, p_cond:cond})})
       .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function(j){ cat[k]=j||{}; return cat[k]; })
-      .catch(function(){ cat[k]={}; return cat[k]; });
+      .then(function(j){ cat[k]=j||{}; CORE_MAKES.forEach(function(m){ if(!cat[k][m]) cat[k][m]=[]; }); return cat[k]; })
+      .catch(function(){ cat[k]={}; CORE_MAKES.forEach(function(m){ cat[k][m]=[]; }); return cat[k]; });
   }
   function opt(v,t){ var o=document.createElement('option'); o.value=v; o.textContent=t||v; return o; }
   function fillMakes(){
