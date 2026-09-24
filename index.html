@@ -72,6 +72,16 @@
   .hero-mark{justify-self:center;width:100%;max-width:380px;opacity:.95}
   .hero-mark img{width:100%;display:block;filter:drop-shadow(0 18px 40px rgba(0,0,0,.5))}
 
+  .btn-ins{border-color:var(--cyan);color:var(--cyan)}
+  .btn-ins:hover{background:rgba(53,192,240,.12)}
+  .insband{display:block;background:var(--cyan);color:#06121C;text-decoration:none;position:relative;overflow:hidden}
+  .insband::after{content:"";position:absolute;top:-20%;bottom:-20%;right:8%;width:5px;background:#fff;opacity:.55;transform:skewX(-19deg)}
+  .insband-in{max-width:1120px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;gap:14px 22px;flex-wrap:wrap;position:relative;z-index:1}
+  .insband .new{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.16em;background:#06121C;color:var(--cyan);padding:4px 8px}
+  .insband b{font-family:"Archivo",sans-serif;font-weight:800;font-style:italic;font-size:1.25rem;letter-spacing:-.02em}
+  .insband span.t{font-size:1rem;flex:1;min-width:220px}
+  .insband .go{font-family:"Archivo",sans-serif;font-weight:700;background:#06121C;color:#fff;padding:11px 20px;white-space:nowrap}
+  .insband:hover .go{background:var(--navy-2)}
   .strip{background:var(--navy-2);color:#CFDDEC;border-top:1px solid rgba(255,255,255,.08)}
   .strip-in{max-width:1120px;margin:0 auto;padding:18px 24px;display:flex;gap:14px 40px;flex-wrap:wrap;justify-content:center;
     font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase}
@@ -141,7 +151,7 @@
   <div class="nav-in">
     <a href="#top" aria-label="Starvito home"><img src="wordmark.webp" alt="Starvito"></a>
     <div class="navcta">
-      <a class="btn btn-g" href="/insurance">Motor insurance</a>
+      <a class="btn btn-ins" href="/insurance">Motor insurance</a>
       <a class="btn btn-g" href="tel:+6588080515">8808 0515</a>
       <a class="btn btn-p" href="https://wa.me/6588080515">WhatsApp us</a>
     </div>
@@ -164,6 +174,15 @@
   </div>
 </header>
 
+<a class="insband" href="/insurance" aria-label="Get a motor insurance quote">
+  <div class="insband-in">
+    <span class="new">NEW</span>
+    <b>Cheapest car &amp; bike insurance</b>
+    <span class="t">We compare all insurers and get you the lowest price. New or used, renewal or switch.</span>
+    <span class="go">Get a quote &rarr;</span>
+  </div>
+</a>
+
 <div class="strip">
   <div class="strip-in">
     <span><i class="dot"></i>Cash on handover</span>
@@ -172,6 +191,15 @@
     <span><i class="dot"></i>Open 24 hours</span>
   </div>
 </div>
+
+<section class="details" id="insurance">
+  <div class="wrap">
+    <div class="kicker">Also from Starvito</div>
+    <h2>Cheapest motor insurance — we compare for you</h2>
+    <p class="lead">Car or motorcycle, new or used, renewal or switch. Give us your plate and access code, or pick your make and model, and we compare across insurers to get you the lowest price we can find.</p>
+    <p style="margin:26px 0 0"><a class="btn btn-p" href="/insurance" style="padding:14px 26px;font-size:.95rem">Get an insurance quote</a></p>
+  </div>
+</section>
 
 <section>
   <div class="wrap">
@@ -224,15 +252,6 @@
   </div>
 </section>
 
-
-<section class="details" id="insurance">
-  <div class="wrap">
-    <div class="kicker">Also from Starvito</div>
-    <h2>Cheapest motor insurance — we compare for you</h2>
-    <p class="lead">Car or motorcycle, new or used, renewal or switch. Give us your plate and access code, or pick your make and model, and we compare across insurers to get you the lowest price we can find.</p>
-    <p style="margin:26px 0 0"><a class="btn btn-p" href="/insurance" style="padding:14px 26px;font-size:.95rem">Get an insurance quote</a></p>
-  </div>
-</section>
 
 <section class="cta">
   <div class="wrap">
